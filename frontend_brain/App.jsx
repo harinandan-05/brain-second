@@ -1,1 +1,0 @@
-// React frontend entry point

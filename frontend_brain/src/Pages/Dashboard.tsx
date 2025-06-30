@@ -12,19 +12,28 @@ import axios from 'axios'
 import { BACKEND_URL } from './Config'
 import  {data} from 'react-router-dom'
 
+type axiosResponse = {
+ title: string,
+ link: string; 
+}
+
+
+
 function Dashboard() {
   const [modal, setModal] = useState(false)
-  const [content, setContent] = useState<any[]>([]); 
-
+  const [content, setContent] = useState<axiosResponse[]>([]);
+console.log(typeof content)
   async function fetchcontent(){
     const token = localStorage.getItem("token");
      console.log("Token being sent:", token); 
     const response = await axios.get(BACKEND_URL + "/api/v1/content",{
       headers:{
-        Authorization: token
+         Authorization: `Bearer ${token}`
       }
     })
+    console.log("axios respons" + response)
     setContent(response.data.content)
+    
   }
   useEffect(() =>{
       fetchcontent();
@@ -48,7 +57,7 @@ function Dashboard() {
     <Button varient='primary' text='share brain' starticon={<Shareicon />}/>
     </div>
     <div className='flex ml-4 gap-5 flex-wrap'>
-          {content.map((item: any, index) => (
+          {content.map((item: axiosResponse, index) => (
             <Card
               key={index}
               title={item.title}
