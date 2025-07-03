@@ -21,13 +21,16 @@ export function Popup({open,onclose,onsubmit}: Popupprops){
         const title = titleref.current!.value;
         const link = linkref.current!.value;
         const token = localStorage.getItem("token")
+        console.log(token)
+        console.log(title)
+        console.log(link)
 
         await axios.post(BACKEND_URL + "/api/v1/content",{
             title,
             link
         },{
             headers:{
-                Autherization:token
+                Authorization:`Bearer ${token}`
             }
         })
         onsubmit({title,link});

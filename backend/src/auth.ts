@@ -8,7 +8,7 @@ export const userMiddleware = (req: Request, res: Response, next: NextFunction) 
 
   const authHeader = req.headers["authorization"];
 
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+  if (!authHeader || !authHeader.startsWith("Bearer")) {
     res.status(401).json({ msg: "No token or invalid format" });
     return;
   }
@@ -17,7 +17,6 @@ export const userMiddleware = (req: Request, res: Response, next: NextFunction) 
   
   try {
     const decoded = jwt.verify(token, JWT_SECRET) as { id: string };
-    //@ts-ignore
     req.userId = decoded.id;
     next();
   } catch (err) {
