@@ -19,7 +19,7 @@ function Dashboard() {
   const [modal, setModal] = useState(false)
   const [content, setContent] = useState<axiosResponse[]>([]);
   
-  console.log("CONTENT", content) // Fixed: removed string concatenation
+  console.log("CONTENT", content) 
   
   useEffect(() => {
     async function fetchcontent() {
@@ -42,7 +42,7 @@ function Dashboard() {
     fetchcontent();
   }, [])
 
-  console.log("Content length:", content.length) // Moved outside JSX
+  console.log("Content length:", content.length)
 
   return (
     <>
@@ -75,15 +75,15 @@ function Dashboard() {
           {content.length > 0 ? (
             content.map((item: axiosResponse, index) => (
               <Card
-                key={index} // Added key prop
-                title={item.title || "Untitled"} // Use actual data
-                link={item.link || "#"} // Use actual data
+                key={index}
+                title={item.title || "Untitled"} 
+                link={item.link || "#"} 
                 starticon={<Fileicon />}
                 endIcon={<Deleteicon />}
               />
             ))
           ) : (
-            <p>No content available</p> // Show message when no content
+            <p>No content available</p>
           )}
         </div>
       </div>
